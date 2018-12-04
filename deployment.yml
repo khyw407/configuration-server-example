@@ -1,0 +1,39 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: config
+spec:
+  type: NodePort
+  selector:
+    app: spring-cloud-config
+  ports:
+  - protocol: TCP
+    port: 8888
+    targetPort: 8888
+    nodePort: 31001
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: spring-cloud-config
+  labels:
+    app: spring-cloud-config
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spring-cloud-config
+  template:
+    metadata:
+      labels:
+        app: spring-cloud-config
+        version: latest
+    spec:
+      hostname: config
+      subdomain: config
+      containers:
+      - name: spring-cloud-config
+        image: 192.168.0.8:5000/config-server:latest
+        ports:
+        - name: http
+          containerPort: 8888
