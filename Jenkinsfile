@@ -22,7 +22,7 @@ node {
     }
     
     stage('Build Docker Image') {
-        buildImage = docker.build("eureka-server:latest")
+        buildImage = docker.build("configuration-server:latest")
     }
     
     stage('Archive') {
