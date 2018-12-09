@@ -1,28 +1,16 @@
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: configuration
-spec:
-  rules:
-  - http:
-      paths:
-      - path: /
-        backend:
-          serviceName: configuration
-          servicePort: 8888
----
 kind: Service
 apiVersion: v1
 metadata:
   name: configuration
 spec:
-  type: ClusterIP
+  type: NodePort
   selector:
     app: spring-cloud-config
   ports:
   - protocol: TCP
     port: 8888
     targetPort: 8888
+    nodePort: 8888
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment
