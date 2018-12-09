@@ -4,8 +4,7 @@ metadata:
   name: configuration
 spec:
   rules:
-  - host: config.microservices.com
-    http:
+  - http:
       paths:
       - path: /
         backend:
