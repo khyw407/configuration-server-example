@@ -1,16 +1,29 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: configuration
+spec:
+  rules:
+  - host: config.microservices.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: configuration
+          servicePort: 8888
+---
 kind: Service
 apiVersion: v1
 metadata:
-  name: config
+  name: configuration
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
     app: spring-cloud-config
   ports:
   - protocol: TCP
     port: 8888
     targetPort: 8888
-    nodePort: 31001
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment
@@ -33,7 +46,7 @@ spec:
       subdomain: config
       containers:
       - name: spring-cloud-config
-        image: 192.168.0.8:5000/config-server:latest
+        image: 192.168.0.8:5000/configuration-server:latest
         ports:
         - name: http
           containerPort: 8888
