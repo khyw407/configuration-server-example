@@ -51,3 +51,4 @@ spec:
         ports:
         - name: http
           containerPort: 8888
+          
