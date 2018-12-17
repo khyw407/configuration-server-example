@@ -1,15 +1,15 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: config
+  name: configuration
 spec:
   rules:
-  - host: config.192.168.0.9.nip.io
+  - host: configuration.192.168.0.9.nip.io
     http:
       paths:
       - path: /
         backend:
-          serviceName: config
+          serviceName: configuration
           servicePort: 32000
 ---
 kind: Service
@@ -43,8 +43,8 @@ spec:
         app: spring-cloud-config
         version: latest
     spec:
-      hostname: config
-      subdomain: config
+      hostname: configuration
+      subdomain: configuration
       containers:
       - name: spring-cloud-config
         image: 192.168.0.8:5000/configuration-server:latest
