@@ -9,3 +9,9 @@ spring:
       server:
         git:
           uri: https://github.com/khyw407/configuration-repository.git
+          cloneOnStart: true
+  rabbitmq:
+    host: 192.168.0.16
+    port: 5672
+    username: guest
+    password: guest
